@@ -14,7 +14,7 @@ const host = (import.meta.env.VITE_EMULATOR_HOST as string | undefined) ?? '127.
 const app = initializeApp({ apiKey: 'demo-api-key', authDomain: `${PROJECT_ID}.firebaseapp.com`, projectId: PROJECT_ID });
 const auth = getAuth(app);
 connectAuthEmulator(auth, `http://${host}:9099`, { disableWarnings: true });
-const db = initializeFirestore(app, { experimentalAutoDetectLongPolling: true });
+const db = initializeFirestore(app, {});
 connectFirestoreEmulator(db, host, 8080);
 const functions = getFunctions(app, 'europe-west3');
 connectFunctionsEmulator(functions, host, 5001);

@@ -73,6 +73,7 @@ async function create() {
   </div>
 
   <p v-if="store.loading" class="muted" aria-live="polite">Loading…</p>
+  <p v-if="store.error" class="error" role="alert">{{ store.error }}</p>
   <ul v-if="view === 'list'" class="list" data-testid="audit-list">
     <li v-for="a in filtered" :key="a.id" class="list-item">
       <RouterLink :to="`/audits/${a.id}`"><strong>{{ a.title }}</strong></RouterLink>

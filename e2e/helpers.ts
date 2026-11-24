@@ -4,6 +4,7 @@ export const PASSWORD = 'demo-password';
 
 export async function login(page: Page, email: string) {
   await page.goto('/login');
+  await expect(page.getByLabel('Email')).toBeVisible();
   await page.getByLabel('Email').fill(email);
   await page.getByLabel('Password').fill(PASSWORD);
   await page.getByRole('button', { name: 'Sign in' }).click();
@@ -13,6 +14,7 @@ export async function login(page: Page, email: string) {
 /** Creates a fresh audit through the UI so tests do not depend on each other. */
 export async function planAudit(page: Page, title: string) {
   await page.getByRole('link', { name: 'Audits' }).click();
+  await expect.poll(() => page.getByTestId('audit-list').locator('li').count(), { timeout: 30_000 }).toBeGreaterThan(0);
   await page.getByRole('button', { name: 'Plan audit' }).click();
   await page.getByLabel('Title').fill(title);
   await page.getByLabel('Type').selectOption({ label: 'Workplace safety walk' });

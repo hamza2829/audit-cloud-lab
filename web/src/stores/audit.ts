@@ -30,21 +30,26 @@ export const useAuditStore = defineStore('audit', {
       if (this.loaded && !force) return;
       this.loading = true;
       this.error = '';
-      try {
-        const repo = getRepo();
-        const [types, audits, findings, actions] = await Promise.all([
-          repo.listAuditTypes(), repo.listAudits(), repo.listFindings(), repo.listActions(),
-        ]);
-        this.auditTypes = types;
-        this.audits = audits;
-        this.findings = findings;
-        this.actions = actions;
-        this.loaded = true;
-      } catch (e) {
-        this.error = `Could not load data: ${(e as Error).message}`;
-      } finally {
-        this.loading = false;
+      const repo = getRepo();
+      // Retries cover the short window after sign-in where the first request can still go out without a token.
+      for (let attempt = 1; attempt <= 4; attempt++) {
+        try {
+          const [types, audits, findings, actions] = await Promise.all([
+            repo.listAuditTypes(), repo.listAudits(), repo.listFindings(), repo.listActions(),
+          ]);
+          this.auditTypes = types;
+          this.audits = audits;
+          this.findings = findings;
+          this.actions = actions;
+          this.loaded = true;
+          this.error = '';
+          break;
+        } catch (e) {
+          this.error = `Could not load data: ${(e as Error).message}`;
+          if (attempt < 4) await new Promise((r) => setTimeout(r, 400 * attempt));
+        }
       }
+      this.loading = false;
     },
     async createAudit(input: { title: string; typeId: string; site: string; plannedDate: string; auditor: string }) {
       const type = this.auditTypes.find((t) => t.id === input.typeId);

@@ -4,6 +4,7 @@ import { addFinding, login, planAudit, PASSWORD } from './helpers';
 test('rejects a wrong password', async ({ page }) => {
   await page.goto('/');
   await expect(page).toHaveURL(/\/login/);
+  await expect(page.getByLabel('Email')).toBeVisible();
   await page.getByLabel('Email').fill('auditor@demo.test');
   await page.getByLabel('Password').fill('wrong-password');
   await page.getByRole('button', { name: 'Sign in' }).click();
@@ -12,10 +13,9 @@ test('rejects a wrong password', async ({ page }) => {
 
 test('auditor sees the seeded dashboard', async ({ page }) => {
   await login(page, 'auditor@demo.test');
-  const audits = page.getByRole('group', { name: 'Audits' }).getByTestId('stat-value');
-  await expect(audits).toHaveText(/^\d+$/);
-  expect(Number(await audits.textContent())).toBeGreaterThanOrEqual(40);
-  expect(Number(await page.getByRole('group', { name: 'Findings' }).getByTestId('stat-value').textContent())).toBeGreaterThanOrEqual(300);
+  const stat = (name: string) => page.getByRole('group', { name }).getByTestId('stat-value');
+  await expect.poll(async () => Number(await stat('Audits').textContent()), { timeout: 30_000 }).toBeGreaterThanOrEqual(40);
+  await expect.poll(async () => Number(await stat('Findings').textContent()), { timeout: 30_000 }).toBeGreaterThanOrEqual(300);
   await expect(page.getByRole('heading', { name: 'Recurring root causes (suggested)' })).toBeVisible();
   await expect(page.locator('.rc-list li').first()).toBeVisible();
 });
@@ -23,8 +23,7 @@ test('auditor sees the seeded dashboard', async ({ page }) => {
 test('audit list and calendar views', async ({ page }) => {
   await login(page, 'auditor@demo.test');
   await page.getByRole('link', { name: 'Audits' }).click();
-  await expect(page.getByTestId('audit-list').locator('li')).not.toHaveCount(0);
-  expect(await page.getByTestId('audit-list').locator('li').count()).toBeGreaterThanOrEqual(40);
+  await expect.poll(() => page.getByTestId('audit-list').locator('li').count(), { timeout: 30_000 }).toBeGreaterThanOrEqual(40);
   await page.getByLabel('Search').fill('Supplier audit');
   await expect(page.getByTestId('audit-list').locator('li').first()).toContainText('Supplier audit');
   await page.getByRole('button', { name: 'Calendar' }).click();
@@ -100,6 +99,7 @@ test('viewer is read only', async ({ page }) => {
 test('works with keyboard only on a phone sized screen', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/login');
+  await expect(page.getByLabel('Email')).toBeVisible();
   await page.keyboard.press('Tab');
   await expect(page.getByRole('link', { name: 'Skip to content' })).toBeFocused();
   await page.getByLabel('Email').focus();
