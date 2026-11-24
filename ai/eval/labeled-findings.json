@@ -1,0 +1,320 @@
+{
+ "description": "Hand-written synthetic audit findings with gold root-cause labels. Written separately from the seed phrase bank.",
+ "items": [
+  {
+   "id": "calibration-1",
+   "text": "Micrometer in the measuring room has an expired calibration sticker",
+   "rootCause": "calibration"
+  },
+  {
+   "id": "calibration-2",
+   "text": "Pressure gauge on the test rig was last calibrated two years ago",
+   "rootCause": "calibration"
+  },
+  {
+   "id": "calibration-3",
+   "text": "Torque wrench calibration interval exceeded by three months",
+   "rootCause": "calibration"
+  },
+  {
+   "id": "calibration-4",
+   "text": "Calibration certificate for the coordinate measuring machine cannot be found",
+   "rootCause": "calibration"
+  },
+  {
+   "id": "calibration-5",
+   "text": "Digital caliper shows no calibration label",
+   "rootCause": "calibration"
+  },
+  {
+   "id": "calibration-6",
+   "text": "Scale in goods receipt not calibrated after relocation",
+   "rootCause": "calibration"
+  },
+  {
+   "id": "calibration-7",
+   "text": "Thermometer used for oven checks lacks valid calibration",
+   "rootCause": "calibration"
+  },
+  {
+   "id": "calibration-8",
+   "text": "Calibration due date for height gauge already passed",
+   "rootCause": "calibration"
+  },
+  {
+   "id": "calibration-9",
+   "text": "Gauge blocks stored without calibration records",
+   "rootCause": "calibration"
+  },
+  {
+   "id": "documentation-1",
+   "text": "Operators use an outdated revision of the work instruction",
+   "rootCause": "documentation"
+  },
+  {
+   "id": "documentation-2",
+   "text": "Inspection record left unsigned at the end of shift",
+   "rootCause": "documentation"
+  },
+  {
+   "id": "documentation-3",
+   "text": "Batch record pages missing for lot 4471",
+   "rootCause": "documentation"
+  },
+  {
+   "id": "documentation-4",
+   "text": "Obsolete drawing still pinned at the workstation",
+   "rootCause": "documentation"
+  },
+  {
+   "id": "documentation-5",
+   "text": "Process deviation not documented in the shift log",
+   "rootCause": "documentation"
+  },
+  {
+   "id": "documentation-6",
+   "text": "Control plan revision does not match the released document",
+   "rootCause": "documentation"
+  },
+  {
+   "id": "documentation-7",
+   "text": "Handwritten corrections in the record without signature or date",
+   "rootCause": "documentation"
+  },
+  {
+   "id": "documentation-8",
+   "text": "Document change not distributed to the night shift",
+   "rootCause": "documentation"
+  },
+  {
+   "id": "documentation-9",
+   "text": "First article inspection record incomplete",
+   "rootCause": "documentation"
+  },
+  {
+   "id": "training-1",
+   "text": "New employee operates the press without documented training",
+   "rootCause": "training"
+  },
+  {
+   "id": "training-2",
+   "text": "Qualification matrix outdated for the welding cell",
+   "rootCause": "training"
+  },
+  {
+   "id": "training-3",
+   "text": "Forklift driver training certificate expired",
+   "rootCause": "training"
+  },
+  {
+   "id": "training-4",
+   "text": "Temporary worker not trained on the updated procedure",
+   "rootCause": "training"
+  },
+  {
+   "id": "training-5",
+   "text": "No training record for the soldering operator",
+   "rootCause": "training"
+  },
+  {
+   "id": "training-6",
+   "text": "Operator unaware of the new inspection procedure, training not delivered",
+   "rootCause": "training"
+  },
+  {
+   "id": "training-7",
+   "text": "Refresher training for lockout tagout overdue for two employees",
+   "rootCause": "training"
+  },
+  {
+   "id": "training-8",
+   "text": "Trainer sign off missing in the training matrix",
+   "rootCause": "training"
+  },
+  {
+   "id": "training-9",
+   "text": "Shift lead could not show qualification evidence for the crimping operator",
+   "rootCause": "training"
+  },
+  {
+   "id": "housekeeping-1",
+   "text": "Pallets block the emergency escape route",
+   "rootCause": "housekeeping"
+  },
+  {
+   "id": "housekeeping-2",
+   "text": "Oil spill on the floor next to the lathe not cleaned",
+   "rootCause": "housekeeping"
+  },
+  {
+   "id": "housekeeping-3",
+   "text": "Scrap containers overflowing in the machining area",
+   "rootCause": "housekeeping"
+  },
+  {
+   "id": "housekeeping-4",
+   "text": "Cardboard waste piled in front of the electrical cabinet",
+   "rootCause": "housekeeping"
+  },
+  {
+   "id": "housekeeping-5",
+   "text": "Walkway cluttered with packaging material",
+   "rootCause": "housekeeping"
+  },
+  {
+   "id": "housekeeping-6",
+   "text": "Coolant puddle near the grinding machine",
+   "rootCause": "housekeeping"
+  },
+  {
+   "id": "housekeeping-7",
+   "text": "Tools and parts lying on the floor in the aisle",
+   "rootCause": "housekeeping"
+  },
+  {
+   "id": "housekeeping-8",
+   "text": "Fire extinguisher access blocked by stacked boxes",
+   "rootCause": "housekeeping"
+  },
+  {
+   "id": "housekeeping-9",
+   "text": "Dust and chips accumulated under the workbench",
+   "rootCause": "housekeeping"
+  },
+  {
+   "id": "ppe-1",
+   "text": "Operator not wearing safety glasses at the grinder",
+   "rootCause": "ppe"
+  },
+  {
+   "id": "ppe-2",
+   "text": "Hearing protection not worn in the stamping hall",
+   "rootCause": "ppe"
+  },
+  {
+   "id": "ppe-3",
+   "text": "Visitor entered the shop floor without safety shoes",
+   "rootCause": "ppe"
+  },
+  {
+   "id": "ppe-4",
+   "text": "Cut resistant gloves not used when handling sheet metal",
+   "rootCause": "ppe"
+  },
+  {
+   "id": "ppe-5",
+   "text": "Welder working without face shield",
+   "rootCause": "ppe"
+  },
+  {
+   "id": "ppe-6",
+   "text": "Respirator not worn while spraying paint",
+   "rootCause": "ppe"
+  },
+  {
+   "id": "ppe-7",
+   "text": "Employees skip safety glasses during changeover",
+   "rootCause": "ppe"
+  },
+  {
+   "id": "ppe-8",
+   "text": "No hearing protection available at the dispenser",
+   "rootCause": "ppe"
+  },
+  {
+   "id": "ppe-9",
+   "text": "High visibility vest missing in the forklift zone",
+   "rootCause": "ppe"
+  },
+  {
+   "id": "labelling-1",
+   "text": "Nonconforming parts stored without red tag",
+   "rootCause": "labelling"
+  },
+  {
+   "id": "labelling-2",
+   "text": "Chemical bottle without hazard label in the lab",
+   "rootCause": "labelling"
+  },
+  {
+   "id": "labelling-3",
+   "text": "Material identification label faded and unreadable",
+   "rootCause": "labelling"
+  },
+  {
+   "id": "labelling-4",
+   "text": "Rework parts not labelled and mixed with good parts",
+   "rootCause": "labelling"
+  },
+  {
+   "id": "labelling-5",
+   "text": "Container of solvent lacks GHS hazard label",
+   "rootCause": "labelling"
+  },
+  {
+   "id": "labelling-6",
+   "text": "Quarantine area items missing identification tags",
+   "rootCause": "labelling"
+  },
+  {
+   "id": "labelling-7",
+   "text": "Part number label missing on finished goods box",
+   "rootCause": "labelling"
+  },
+  {
+   "id": "labelling-8",
+   "text": "Unlabelled spray bottle found at the cleaning station",
+   "rootCause": "labelling"
+  },
+  {
+   "id": "labelling-9",
+   "text": "Blocked stock not tagged as nonconforming",
+   "rootCause": "labelling"
+  },
+  {
+   "id": "maintenance-1",
+   "text": "Machine guard on the milling machine is loose",
+   "rootCause": "maintenance"
+  },
+  {
+   "id": "maintenance-2",
+   "text": "Preventive maintenance for the compressor overdue",
+   "rootCause": "maintenance"
+  },
+  {
+   "id": "maintenance-3",
+   "text": "Hydraulic oil leak at the press cylinder",
+   "rootCause": "maintenance"
+  },
+  {
+   "id": "maintenance-4",
+   "text": "Conveyor belt worn and not replaced as scheduled",
+   "rootCause": "maintenance"
+  },
+  {
+   "id": "maintenance-5",
+   "text": "Emergency stop button on the lathe sticks",
+   "rootCause": "maintenance"
+  },
+  {
+   "id": "maintenance-6",
+   "text": "Maintenance plan for the robot cell not followed",
+   "rootCause": "maintenance"
+  },
+  {
+   "id": "maintenance-7",
+   "text": "Air leak on the pneumatic line of the assembly station",
+   "rootCause": "maintenance"
+  },
+  {
+   "id": "maintenance-8",
+   "text": "Safety guard interlock bypassed on the saw",
+   "rootCause": "maintenance"
+  },
+  {
+   "id": "maintenance-9",
+   "text": "Lubrication schedule for the spindle missed",
+   "rootCause": "maintenance"
+  }
+ ]
+}

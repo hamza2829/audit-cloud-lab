@@ -1,0 +1,8 @@
+{
+  "description": "Gzip size budgets in KiB for the production build (dist/assets).",
+  "totalJsKiB": 240,
+  "firebaseChunkKiB": 185,
+  "appJsKiB": 60,
+  "cssKiB": 8,
+  "largestAppChunkKiB": 45
+}

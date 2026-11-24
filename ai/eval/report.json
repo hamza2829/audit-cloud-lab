@@ -1,0 +1,86 @@
+{
+  "sweep": [
+    {
+      "threshold": 0.02,
+      "clusters": 9,
+      "purity": 0.524,
+      "precision": 0.345,
+      "recall": 0.54,
+      "f1": 0.421,
+      "ari": 0.313
+    },
+    {
+      "threshold": 0.04,
+      "clusters": 17,
+      "purity": 0.794,
+      "precision": 0.621,
+      "recall": 0.377,
+      "f1": 0.469,
+      "ari": 0.412
+    },
+    {
+      "threshold": 0.06,
+      "clusters": 19,
+      "purity": 0.857,
+      "precision": 0.795,
+      "recall": 0.369,
+      "f1": 0.504,
+      "ari": 0.46
+    },
+    {
+      "threshold": 0.08,
+      "clusters": 23,
+      "purity": 0.889,
+      "precision": 0.867,
+      "recall": 0.337,
+      "f1": 0.486,
+      "ari": 0.446
+    },
+    {
+      "threshold": 0.1,
+      "clusters": 25,
+      "purity": 0.889,
+      "precision": 0.852,
+      "recall": 0.298,
+      "f1": 0.441,
+      "ari": 0.401
+    },
+    {
+      "threshold": 0.12,
+      "clusters": 30,
+      "purity": 0.937,
+      "precision": 0.897,
+      "recall": 0.242,
+      "f1": 0.381,
+      "ari": 0.345
+    },
+    {
+      "threshold": 0.16,
+      "clusters": 38,
+      "purity": 0.937,
+      "precision": 0.848,
+      "recall": 0.111,
+      "f1": 0.196,
+      "ari": 0.172
+    },
+    {
+      "threshold": 0.2,
+      "clusters": 45,
+      "purity": 0.952,
+      "precision": 0.842,
+      "recall": 0.063,
+      "f1": 0.118,
+      "ari": 0.102
+    }
+  ],
+  "heldOut": {
+    "tunedThreshold": 0.12,
+    "threshold": 0.12,
+    "clusters": 19,
+    "purity": 0.839,
+    "precision": 0.571,
+    "recall": 0.148,
+    "f1": 0.235,
+    "ari": 0.197
+  }
+}

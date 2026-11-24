@@ -1,0 +1,65 @@
+rules_version = '2';
+// Roles come from custom auth claims set by the seed script (auditor, manager, viewer).
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function role() { return signedIn() ? request.auth.token.get('role', 'viewer') : null; }
+    function canWrite() { return role() in ['auditor', 'manager']; }
+    function isManager() { return role() == 'manager'; }
+    function isDate(v) { return v is string && v.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$'); }
+    function onlyChanges(keys) { return request.resource.data.diff(resource.data).affectedKeys().hasOnly(keys); }
+
+    match /auditTypes/{id} {
+      allow read: if signedIn();
+      allow write: if isManager();
+    }
+
+    match /audits/{id} {
+      allow read: if signedIn();
+      allow create: if canWrite()
+        && request.resource.data.keys().hasAll(['title', 'typeId', 'site', 'plannedDate', 'status', 'checklist', 'auditor'])
+        && request.resource.data.title is string && request.resource.data.title.size() >= 3
+        && isDate(request.resource.data.plannedDate)
+        && request.resource.data.status in ['planned', 'in_progress', 'closed']
+        && request.resource.data.checklist is list;
+      allow update: if canWrite()
+        && onlyChanges(['title', 'site', 'plannedDate', 'status', 'checklist'])
+        && request.resource.data.status in ['planned', 'in_progress', 'closed'];
+      allow delete: if isManager();
+    }
+
+    match /findings/{id} {
+      allow read: if signedIn();
+      allow create: if canWrite()
+        && request.resource.data.title is string
+        && request.resource.data.title.size() >= 3 && request.resource.data.title.size() <= 120
+        && request.resource.data.severity in ['low', 'medium', 'high', 'critical']
+        && request.resource.data.auditId is string
+        && exists(/databases/$(database)/documents/audits/$(request.resource.data.auditId))
+        && request.resource.data.createdBy == request.auth.token.email
+        && !('riskScore' in request.resource.data) && !('riskBand' in request.resource.data)
+        && (!('imageDataUrl' in request.resource.data) || request.resource.data.imageDataUrl == null
+            || (request.resource.data.imageDataUrl is string && request.resource.data.imageDataUrl.size() <= 210000));
+      allow update: if canWrite() && onlyChanges(['title', 'description', 'severity', 'category'])
+        && request.resource.data.severity in ['low', 'medium', 'high', 'critical'];
+      allow delete: if isManager();
+    }
+
+    match /actions/{id} {
+      allow read: if signedIn();
+      allow create: if canWrite()
+        && request.resource.data.title is string && request.resource.data.title.size() >= 3
+        && request.resource.data.owner is string && request.resource.data.owner.size() > 0
+        && isDate(request.resource.data.dueDate)
+        && request.resource.data.status == 'open'
+        && !('overdue' in request.resource.data);
+      allow update: if canWrite() && onlyChanges(['status', 'owner', 'dueDate'])
+        && request.resource.data.status in ['open', 'done'];
+      allow delete: if isManager();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,89 @@
+:root {
+  --bg: #f5f7fa; --fg: #1b2430; --muted: #4f5b6a; --card: #fff; --line: #d6dde6;
+  --brand: #1f4e79; --brand-fg: #fff; --ok: #1e7a3c; --warn: #8a5a00; --bad: #b3261e;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 16px; line-height: 1.5;
+  color: var(--fg); background: var(--bg);
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+h1 { font-size: 1.5rem; margin: 0.5rem 0 1rem; }
+h2 { font-size: 1.15rem; margin: 0 0 0.75rem; }
+h3 { font-size: 1.05rem; margin: 0 0 0.5rem; }
+a { color: var(--brand); }
+main { max-width: 1100px; margin: 0 auto; padding: 1rem; outline: none; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip-link { position: absolute; left: -999px; top: 0; background: var(--brand); color: var(--brand-fg); padding: 0.5rem 1rem; z-index: 10; }
+.skip-link:focus { left: 0.5rem; }
+:focus-visible { outline: 3px solid #f2a900; outline-offset: 2px; }
+.topbar { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; padding: 0.5rem 1rem; background: var(--brand); color: var(--brand-fg); }
+.topbar a, .topbar .link { color: var(--brand-fg); }
+.topbar nav { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+.topbar nav a { padding: 0.5rem 0.75rem; text-decoration: none; border-radius: 6px; min-height: 44px; display: inline-flex; align-items: center; }
+.topbar nav a.router-link-exact-active { background: rgba(255,255,255,0.18); }
+.brand { font-weight: 700; }
+.user { margin-left: auto; font-size: 0.9rem; }
+button, input, select, textarea { font: inherit; }
+button { min-height: 44px; padding: 0.4rem 0.9rem; border: 1px solid var(--line); border-radius: 6px; background: var(--card); color: var(--fg); cursor: pointer; }
+button.primary { background: var(--brand); color: var(--brand-fg); border-color: var(--brand); }
+button.link { background: none; border: none; text-decoration: underline; }
+button[aria-pressed='true'] { background: var(--brand); color: var(--brand-fg); }
+button:disabled { opacity: 0.6; cursor: default; }
+input, select, textarea { width: 100%; min-height: 44px; padding: 0.4rem 0.5rem; border: 1px solid #8a96a6; border-radius: 6px; background: #fff; color: var(--fg); }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 1rem; margin-bottom: 1rem; }
+.form { display: grid; gap: 0.6rem; }
+.form label { display: grid; gap: 0.2rem; font-weight: 600; }
+.row { display: grid; gap: 0.6rem; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+.inline-form { margin-top: 0.5rem; }
+.error { color: var(--bad); margin: 0; }
+.notice { color: var(--ok); min-height: 1.5em; margin: 0 0 0.5rem; }
+.muted { color: var(--muted); }
+.small { font-size: 0.875rem; }
+.meta { color: var(--muted); font-size: 0.9rem; }
+.page-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.5rem; }
+.btns { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: end; margin-bottom: 1rem; }
+.search { display: grid; gap: 0.2rem; flex: 1 1 200px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.75rem; margin-bottom: 1rem; }
+.stat { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 0.75rem; display: grid; }
+.stat-value { font-size: 1.6rem; }
+.stat.warn .stat-value { color: var(--warn); }
+.stat.bad .stat-value { color: var(--bad); }
+.stat-label, .stat-hint { color: var(--muted); font-size: 0.875rem; }
+.grid2 { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.chart { margin: 0; }
+.chart figcaption { font-weight: 700; margin-bottom: 0.5rem; }
+.bars { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.4rem; }
+.bar-row { display: grid; grid-template-columns: 5rem 1fr 3rem; align-items: center; gap: 0.5rem; }
+.bar-track { background: #e8edf3; border-radius: 4px; height: 0.9rem; }
+.bar { display: block; height: 100%; border-radius: 4px; }
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { text-align: left; padding: 0.35rem; border-bottom: 1px solid var(--line); }
+.list { list-style: none; padding: 0; margin: 0; }
+.list-item { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem; padding: 0.6rem 0; border-bottom: 1px solid var(--line); }
+.list-item .meta { display: block; }
+.badge { display: inline-block; padding: 0 0.45rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; background: #e8edf3; color: var(--fg); }
+.sev-low { background: #d8ecdf; color: #14532d; }
+.sev-medium { background: #fdecc8; color: #6b4300; }
+.sev-high { background: #fbd5c8; color: #7c2d12; }
+.sev-critical { background: #b3261e; color: #fff; }
+.bar.sev-low { background: #2e8b57; } .bar.sev-medium { background: #c98a00; } .bar.sev-high { background: #d4582a; } .bar.sev-critical { background: #b3261e; }
+.badge.done, .st-closed { background: #d8ecdf; color: #14532d; }
+.st-in_progress { background: #dbe7f5; color: #1f3a5f; }
+.checklist { padding-left: 1.2rem; }
+.checklist fieldset { border: none; padding: 0.25rem 0; margin: 0; }
+.checklist legend { font-weight: 600; }
+.choice { display: inline-flex; align-items: center; gap: 0.3rem; margin-right: 1rem; min-height: 44px; }
+.choice input { width: auto; min-height: auto; }
+.thumb { max-width: 160px; max-height: 120px; border-radius: 6px; display: block; margin-top: 0.4rem; }
+.calendar-nav { display: flex; justify-content: space-between; align-items: center; }
+.calendar table { width: 100%; table-layout: fixed; border-collapse: collapse; background: var(--card); }
+.calendar th, .calendar td { border: 1px solid var(--line); vertical-align: top; padding: 0.2rem; font-size: 0.8rem; }
+.calendar td { height: 5rem; overflow: hidden; }
+.calendar td.out { background: #eef1f5; color: var(--muted); }
+.cal-audit { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.login { max-width: 420px; margin: 3rem auto; }
+.rc-list li { margin-bottom: 0.4rem; }
+@media (max-width: 600px) {
+  .calendar td { height: 3.5rem; }
+  .user { margin-left: 0; width: 100%; }
+}

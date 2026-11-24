@@ -1,0 +1,80 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Lint, types, unit tests, build, bundle budget
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run test -- --coverage
+      - run: npm run ai:eval
+      - run: npm run build
+      - run: npm run perf:budget
+      - run: npm run build:functions
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: quality-reports
+          path: |
+            reports/
+            ai/eval/report.md
+            ai/eval/report.json
+
+  emulators:
+    name: Rules tests, e2e on emulators, Lighthouse
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/firebase/emulators
+          key: firebase-emulators-${{ hashFiles('package-lock.json') }}
+      - run: npx playwright install --with-deps chromium
+      - name: Firestore security rules tests
+        run: npm run test:rules
+      - name: Production build (emulator backend)
+        run: npm run build
+      - name: Seed emulators and run Playwright e2e
+        run: npm run e2e:emu
+        env:
+          CI: 'true'
+      - name: Lighthouse CI (sign-in page)
+        run: npm run perf:lhci
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: emulator-reports
+          path: |
+            reports/
+            test-results/
